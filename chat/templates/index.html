@@ -1,0 +1,38 @@
+{% load bootstrap4 %}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Chat</title>
+    {%bootstrap_css%}
+</head>
+<body>
+    <div class="container">
+        Qual sala você gostaria de entrar? <br/>
+            <input id="nome_sala" name="nome_sala" type="text" size="100" placeholder="nome da sala.."><br/>
+            {% buttons %}
+                <input id="botao" class="btn btn-primary" type="button" value="Entrar" />
+            {% endbuttons %}
+    </div>
+    <script>
+        document.querySelector('#nome_sala').focus();
+        document.querySelector('#nome_sala').onkeyup = function(e){
+            if(e.KeyCode === 13){
+                document.querySelector('#botao').click();
+            }
+        };
+        document.querySelector('#botao').onclick = function(e){
+            var nome_sala = document.querySelector('#nome_sala').value;
+            if(nome_sala != ""){
+                window.location.pathname = '/chat/' + nome_sala + '/';
+            }else{
+                alert('você precisa informar o nome da sala. ');
+                document.querySelector('#nome_sala').focus();
+            }
+        };
+    </script>
+
+    {% bootstrap4_javascript jquery='full' %}
+</body>
+</html>
